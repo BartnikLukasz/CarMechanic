@@ -150,11 +150,11 @@ public class ClientDAO {
         return clients.size()+1;
     }
 
-    public String checkUserType(String login, String password){
+    public String checkUserType(UserAccount userAccount){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("select account_type from user where login = ? AND password = ? ");
-            preparedStatement.setString(1,login);
-            preparedStatement.setString(2,password);
+            preparedStatement.setString(1,userAccount.getLogin());
+            preparedStatement.setString(2,userAccount.getPassword());
             ResultSet resultSet=preparedStatement.executeQuery();
             if(resultSet.next()) {
                 String s = resultSet.getString("account_type");

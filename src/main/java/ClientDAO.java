@@ -3,6 +3,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//clientDAO class uses java.sql to conenct to database
+
 public class ClientDAO {
 
     final static String url = "jdbc:mysql://localhost:3306/uczenie";
@@ -150,6 +152,7 @@ public class ClientDAO {
         return clients.size()+1;
     }
 
+    //userAccount matches any in database
     public String checkUserType(UserAccount userAccount){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("select account_type from user where login = ? AND password = ? ");
@@ -169,12 +172,5 @@ public class ClientDAO {
         return "No data";
     }
 
-
-
-    public static void main(String[] args)throws Exception {
-
-
-
-    }
 
 }

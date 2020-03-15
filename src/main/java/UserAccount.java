@@ -1,3 +1,4 @@
+//class used to check login data
 public class UserAccount {
     private String login;
     private String password;

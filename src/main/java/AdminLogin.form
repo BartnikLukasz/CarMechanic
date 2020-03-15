@@ -56,7 +56,8 @@
                 </constraints>
                 <properties>
                   <editable value="false"/>
-                  <text value="Login:"/>
+                  <lineWrap value="true"/>
+                  <text value="Login: (For demonstration purposes type admin, admin for ADMIN account and default, default fo DEFAULT account.)"/>
                 </properties>
               </component>
               <vspacer id="3889a">

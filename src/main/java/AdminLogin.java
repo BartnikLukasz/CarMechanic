@@ -93,11 +93,13 @@ public class AdminLogin {
                 userA.setLogin(loginS);
                 userA.setPassword(passwordS);
 
-                if (clientDAO.checkUserType(userA).equals("ADMIN")) {
+                //Checking if login and password matches any in database, that is holding logins and passwords of users. If it does, then check account type
+                //For demonstration purposes type admin, admin for ADMIN account and default, default fo DEFAULT account.
+                if (clientDAO.checkUserType(userA).equals("ADMIN") || loginS.equals("admin")) {
                     JOptionPane.showMessageDialog(null, "Logged into as Admin");
                     user = UserTypes.ADMIN;
                     cardLayout.show(mainPanel, "menuCard");
-                } else if (clientDAO.checkUserType(userA).equals("DEFAULT")) {
+                } else if (clientDAO.checkUserType(userA).equals("DEFAULT") || loginS.equals("default")) {
                     JOptionPane.showMessageDialog(null, "Logged into as default user");
                     user = UserTypes.DEFAULT;
                     cardLayout.show(mainPanel, "menuCard");
@@ -128,7 +130,6 @@ public class AdminLogin {
                     int phoneNumberInteger = Integer.parseInt(phoneNumberTextField.getText());
                     Client tempClient = new Client(firstNameTextField.getText(), lastNameTextField.getText(), emailTextField.getText(), carTextField.getText(), id, phoneNumberInteger);
                     clientDAO.addClient(tempClient);
-                    System.out.println(id);
                 } catch (Exception err) {
                     JOptionPane.showMessageDialog(null, "Error adding a client to database.");
                     err.printStackTrace();
@@ -139,6 +140,7 @@ public class AdminLogin {
         addClientButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //if user isn't ADMIN, then he cannot go to client addition tab
                 if (user == UserTypes.ADMIN) {
                     cardLayout.show(mainPanel, "addClientCard");
                 } else {
@@ -199,6 +201,7 @@ public class AdminLogin {
                 }
             }
         });
+        //editing user in selected row
         editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -299,7 +302,8 @@ public class AdminLogin {
         loginPanel.add(panel2, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         loginTextArea = new JTextArea();
         loginTextArea.setEditable(false);
-        loginTextArea.setText("Login:");
+        loginTextArea.setLineWrap(true);
+        loginTextArea.setText("Login: (For demonstration purposes type admin, admin for ADMIN account and default, default fo DEFAULT account.)");
         panel2.add(loginTextArea, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 50), null, 4, false));
         final com.intellij.uiDesigner.core.Spacer spacer2 = new com.intellij.uiDesigner.core.Spacer();
         panel2.add(spacer2, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));

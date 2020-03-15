@@ -1,3 +1,4 @@
+//Client class
 public class Client {
 
     private String firstName, lastName, email, car;
